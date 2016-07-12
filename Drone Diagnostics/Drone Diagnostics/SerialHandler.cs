@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Drone_Diagnostics
 {
-    class SerialHandler
+    [Serializable]
+    class SerialHandler : Attribute
     {
         // This class is rich bitch!
 

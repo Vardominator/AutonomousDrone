@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "autonomousdrone-1370",
+  "private_key_id": "bb11fd09154f251364ea09641822aaddfe6b13f3",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCS3lYP1pDtS7ZC\nXzczOU/l4HAjCIzJPEVXYHgCzyAAidYjEUrzwzLSOVtZQPMpaSXjjZ+MHZXMYLP5\ni+mhhM3G+owGs7/lZOGShMdWUoteinX4B3PCDwUFxqPIvEiwfVoeP1h9E/VKILd/\n2r9eBl2ndD2tKP5l47OXaxdaNhCJ1f72Oc3MkARirT/6OuJ1O2WlAfASsmm+b98Y\n/1LrOunSa7LVKPn4xyiR6YnBHhTS8mW+oIFS157Trhf7k2HrlyKcuBRQylelSg+A\ng6sx3Y8vmmiV2ddB3//c0BXp5BYMDPD8PZgPzSL8G0Psx+8stWdW+B3D3zFnWz1A\nSOZUtOY9AgMBAAECggEAI9qRSfaIlNV53gQelqu0HJtI5NSOggXrq6QKSC1GU7tS\ngmcTVCTgAEAuU8CuW/qmXEHTpEIIssccyJvmYh7omV3K10wEWbzh8IHno+Qsz9yf\nZfhzwvklsb5Hd5a3bBZ97IpsUMSRihIomdbOBuco79tJvz8Vs8v9qMZlAgnWyb8L\nmzgZkiFh2xWaIJUrF3Rcvpb4wPu9+aZumPZzRUP5ss8L6v5Ckz5GLaUc/AUvu64X\n3nsfanzh+uviH3HvW3+es4V5SoEAs0Rb7rm2Om3AKh3Way9phNPn+rXaIKPmoXjz\nVs0XZWvXWxXvj6+UeZDq35O49dI5KVrDuewdqqgZ4QKBgQDeSWAMOGjrz1kd/oLk\nFrdonuUYkMcUPRnTEVJ8ahcf6lzuR2bK2KUUEZdPFrk0o1FQXSbrqxS/mv0E63M7\nkDatWyxfXiKg13FiS2TTYuXP7Tw4oRnVIsWG+y1pJUA/3i+Gq+4CpZr+SDco7CnR\nwaooBPRhD+JQ6HYnwe+LQmx19QKBgQCpJLwcE6Io7+MZKezFJ9lRirvGNgzz6KoA\nEiewmkX/2Wu86656TmDglE1CP3j+MKf0hYJjBLTMsgeLDJq8lVlJUKXa/6Srrdfr\n3bZ0BiO5b9/uTbfib4icM6StdtvR3nFQx7QVMMvmijxbTOyUzJycAZmcIeE2I8lO\nD+WMDdq6KQKBgByTYDaR9eMCp9k0Q81gojlf2+G5ku4mILDClFEMLmba8RFsumkv\nSqF21XXEXRDIQgbLwtofBy7OlOJSBmFM28qTYvPrnRYCPEA/ovmNyC9ftxMsmq6M\npsoAdkkDEexj+sYcSh+q/G7eB8FKAuJFPEOix2vG5/gwuifIRawoYNsVAoGAW+J6\n1f3Mb9SxV/AwkYHuSp/FFg4yxyWzhEpYiVWlhTGFl6GorQR7GEU4Gy8D+YJRG0KT\n7FqYJULpWh5EyQGQ+YT4NJn/yMutqpJNFYZoTcp6qahKppXUbpaXdSxGiiH/CNUT\n/Rb/DYQ2+Zo2QzdMNGuiGPFGuPSD3QZBuu2jztECgYAXZWdO2wdKF9mIUf+zhnlN\nJSYex0bMji09tfKUbUS4uUx4Xxl4IIXko88NamXtSlr8N1NA/+M9j+lFg9Q+HESD\nVIqfdZEsOmVMIPP3VQIn+xXHHouzOgek16WOJqx+GgA9FjdSuUJ1j2ASVbapUW9g\n559IQFRaDjFmfAPtUGp93Q==\n-----END PRIVATE KEY-----\n",
+  "client_email": "vardominator@autonomousdrone-1370.iam.gserviceaccount.com",
+  "client_id": "117226716655575813988",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/vardominator%40autonomousdrone-1370.iam.gserviceaccount.com"
+}
