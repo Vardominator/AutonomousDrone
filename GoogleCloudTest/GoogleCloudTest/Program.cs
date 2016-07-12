@@ -55,21 +55,21 @@ namespace GoogleCloudTest
                 case "ListBuckets":
                     new StorageTest().ListBuckets(projectId);
                     break;
-                //case "ListObjects":
-                //    new StorageTest().ListObjects(bucketName);
-                //    break;
-                //case "UploadStream":
-                //    new StorageTest().UploadStream(bucketName);
-                //    break;
+                case "ListObjects":
+                    new StorageTest().ListObjects(bucketName);
+                    break;
+                case "UploadStream":
+                    new StorageTest().UploadStream(bucketName);
+                    break;
                 //case "DownloadStream":
                 //    new StorageTest().DownloadStream(bucketName);
                 //    break;
                 //case "DeleteObject":
                 //    new StorageTest().DeleteObject(bucketName);
                 //    break;
-                //case "DownloadToFile":
-                //    new StorageTest().DownloadToFile(bucketName);
-                //    break;
+                case "DownloadToFile":
+                    new StorageTest().DownloadToFile(bucketName);
+                    break;
                 //case "DownloadRange":
                 //    new StorageTest().DownloadRange(bucketName);
                 //    break;
