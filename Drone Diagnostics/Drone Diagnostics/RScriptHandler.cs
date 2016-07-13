@@ -18,14 +18,12 @@ namespace Drone_Diagnostics
         private string scriptPath;
         private string executablePath;
         private string resultFromScript;
-        private string lastArguement;
 
 
         public RScriptHandler()
         {
             scriptPath = "";
             executablePath = "";
-            lastArguement = "";
             resultFromScript = "";
         }
 
@@ -34,34 +32,25 @@ namespace Drone_Diagnostics
         {
             scriptPath = rCodeFilePath;
             executablePath = rScriptExecutablePath;
-            lastArguement = "";
             resultFromScript = "";
         }
 
 
-        public string RunFromCommand(string rCodeFilePath, string rScriptExecutablePath, string args)
+        public string RunFromCommand(string args)
         {
 
             try
             {
 
-                ProcessStartInfo info = new ProcessStartInfo();                     // Specifies the values that are present during a process call
-                info.FileName = executablePath;                                     // Executable to use
-                info.WorkingDirectory = Path.GetDirectoryName(executablePath);      // Set directory of executable
-                info.Arguments = scriptPath + " " + args;                       // Set argument
-
-                info.RedirectStandardInput = false;                                 // no need to write the input to the process stream
-                info.RedirectStandardOutput = false;                                // no need to write the output to the process stream
-                info.UseShellExecute = false;                                       // no need to run using the shell
-                info.CreateNoWindow = true;                                         // no external window needed
-
-
                 Process process = new Process();
-                process.StartInfo = info;
+                process.StartInfo.UseShellExecute = false;
+                process.StartInfo.RedirectStandardOutput = true;
+                process.StartInfo.FileName = executablePath;
+                process.StartInfo.WorkingDirectory = Path.GetDirectoryName(scriptPath);
+                process.StartInfo.Arguments = "testScript.R" + " " + args;
+                process.StartInfo.CreateNoWindow = true;
                 process.Start();
                 resultFromScript = process.StandardOutput.ReadToEnd();
-
-                lastArguement = args;
 
                 return resultFromScript;
 
@@ -106,9 +95,7 @@ namespace Drone_Diagnostics
                 }
             }
         }
-
-
-
+        
 
     }
 }

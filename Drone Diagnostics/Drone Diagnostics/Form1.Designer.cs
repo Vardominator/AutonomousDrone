@@ -43,6 +43,7 @@
             this.serialMonitorTestTimer = new System.Windows.Forms.Timer(this.components);
             this.comPortList = new System.Windows.Forms.ComboBox();
             this.resultsFromR = new System.Windows.Forms.ListBox();
+            this.resultsFromRLabel = new System.Windows.Forms.Label();
             this.tabs.SuspendLayout();
             this.motorsTab.SuspendLayout();
             this.SuspendLayout();
@@ -71,6 +72,7 @@
             // 
             // motorsTab
             // 
+            this.motorsTab.Controls.Add(this.resultsFromRLabel);
             this.motorsTab.Controls.Add(this.resultsFromR);
             this.motorsTab.Location = new System.Drawing.Point(4, 29);
             this.motorsTab.Name = "motorsTab";
@@ -163,7 +165,7 @@
             // serialMonitorTestTimer
             // 
             this.serialMonitorTestTimer.Enabled = true;
-            this.serialMonitorTestTimer.Interval = 1000;
+            this.serialMonitorTestTimer.Interval = 500;
             this.serialMonitorTestTimer.Tick += new System.EventHandler(this.serialMonitorTestTimer_Tick);
             // 
             // comPortList
@@ -184,6 +186,16 @@
             this.resultsFromR.Size = new System.Drawing.Size(240, 344);
             this.resultsFromR.TabIndex = 0;
             // 
+            // resultsFromRLabel
+            // 
+            this.resultsFromRLabel.AutoSize = true;
+            this.resultsFromRLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.resultsFromRLabel.Location = new System.Drawing.Point(232, 68);
+            this.resultsFromRLabel.Name = "resultsFromRLabel";
+            this.resultsFromRLabel.Size = new System.Drawing.Size(134, 20);
+            this.resultsFromRLabel.TabIndex = 1;
+            this.resultsFromRLabel.Text = "Results from R:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -203,6 +215,7 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tabs.ResumeLayout(false);
             this.motorsTab.ResumeLayout(false);
+            this.motorsTab.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -223,6 +236,7 @@
         private System.Windows.Forms.Timer serialMonitorTestTimer;
         private System.Windows.Forms.ComboBox comPortList;
         private System.Windows.Forms.ListBox resultsFromR;
+        private System.Windows.Forms.Label resultsFromRLabel;
     }
 }
 

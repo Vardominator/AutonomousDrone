@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace Drone_Diagnostics
 {
@@ -19,14 +20,24 @@ namespace Drone_Diagnostics
         Random motorValueGenerator;
         int[] motorVals;
 
+        string rScriptPath = @"F:\GitHub\AutonomousDrone\Drone Diagnostics\testScript.R";
+        string rScriptExecutablePath = @"C:\Program Files\Microsoft\MRO\R-3.2.5\bin\Rscript.exe";
+        string rScriptArgument = "";
+
+        RScriptHandler rScriptTest;
+
+        Thread rCallingThread;
 
         public Form1()
         {
-
+            
             motorValueGenerator = new Random();
             motorVals = new int[4];
-
+            
+            rScriptTest = new RScriptHandler(rScriptPath, rScriptExecutablePath);
+                
             InitializeComponent();
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -34,17 +45,13 @@ namespace Drone_Diagnostics
 
             availablePorts = SerialPort.GetPortNames();
 
-            
-
             foreach (var port in availablePorts)
             {
                 comPortList.Items.Add(port);
             }
             
         }
-
-
-
+        
         private void statusStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
 
@@ -54,9 +61,7 @@ namespace Drone_Diagnostics
         {
 
         }
-
-
-
+        
 
         #region
         private void serialBeginButton_Click(object sender, EventArgs e)
@@ -76,12 +81,35 @@ namespace Drone_Diagnostics
         private void serialMonitorTestTimer_Tick(object sender, EventArgs e)
         {
 
+            // Scrolling for listboxes
+            serialMonitor.SelectedIndex = serialMonitor.Items.Count - 1;
+            resultsFromR.SelectedIndex = serialMonitor.Items.Count - 1;
+
+
             for (int i = 0; i < motorVals.Length; i++)
             {
-                motorVals[i] = motorValueGenerator.Next(0, 101);    
+                motorVals[i] = motorValueGenerator.Next(0, 101);
+                rScriptArgument += motorVals[i] + " ";
             }
 
             serialMonitor.Items.Add($"{motorVals[0]},{motorVals[1]},{motorVals[2]},{motorVals[3]}");
+
+
+            string rScriptResult = "";
+
+            // Lambda expression captures return value from thread
+            rCallingThread = new Thread(() =>
+            {
+                rScriptResult = rScriptTest.RunFromCommand(rScriptArgument);
+            });
+
+            rCallingThread.Start();
+            rCallingThread.Join();
+
+
+            resultsFromR.Items.Add(rScriptResult);
+
+            rScriptArgument = "";
 
         }
 
