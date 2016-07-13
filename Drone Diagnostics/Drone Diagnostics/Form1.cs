@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO.Ports;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,23 +13,37 @@ namespace Drone_Diagnostics
 {
     public partial class Form1 : Form
     {
+
+
+        string[] availablePorts;
+        Random motorValueGenerator;
+        int[] motorVals;
+
+
         public Form1()
         {
+
+            motorValueGenerator = new Random();
+            motorVals = new int[4];
+
             InitializeComponent();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
 
+            availablePorts = SerialPort.GetPortNames();
 
-            comPort_SetDefaultText();
+            
+
+            foreach (var port in availablePorts)
+            {
+                comPortList.Items.Add(port);
+            }
+            
         }
 
-        protected void comPort_SetDefaultText()
-        {
-            comPort.Text = "Port...";
-            comPort.ForeColor = Color.Gray;
-        }
+
 
         private void statusStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
@@ -40,35 +55,7 @@ namespace Drone_Diagnostics
 
         }
 
-        private void comPort_TextChanged(object sender, EventArgs e)
-        {
 
-        }
-
-
-
-        #region
-        private void comPort_Enter(object sender, EventArgs e)
-        {
-            if(comPort.ForeColor == Color.Black)
-            {
-                return;
-            }
-            comPort.Text = "";
-            comPort.ForeColor = Color.Black;
-        }
-        private void comPort_Leave(object sender, EventArgs e)
-        {
-            if(comPort.Text.Trim() == "")
-            {
-                comPort_SetDefaultText();
-            }
-        }
-        private void checkComPortsButton_Click(object sender, EventArgs e)
-        {
-
-        }
-        #endregion
 
 
         #region
@@ -88,7 +75,21 @@ namespace Drone_Diagnostics
 
         private void serialMonitorTestTimer_Tick(object sender, EventArgs e)
         {
-            serialMonitor.Items.Add("Praise the sun");
+
+            for (int i = 0; i < motorVals.Length; i++)
+            {
+                motorVals[i] = motorValueGenerator.Next(0, 101);    
+            }
+
+            serialMonitor.Items.Add($"{motorVals[0]},{motorVals[1]},{motorVals[2]},{motorVals[3]}");
+
         }
+
+        private void comPortList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+
     }
 }

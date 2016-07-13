@@ -37,13 +37,14 @@
             this.serialMonitor = new System.Windows.Forms.ListBox();
             this.serialStopButton = new System.Windows.Forms.Button();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.comPort = new System.Windows.Forms.TextBox();
             this.batteryLifeLabel = new System.Windows.Forms.Label();
             this.serialBeginButton = new System.Windows.Forms.Button();
             this.serialClearButton = new System.Windows.Forms.Button();
-            this.checkComPortsButton = new System.Windows.Forms.Button();
             this.serialMonitorTestTimer = new System.Windows.Forms.Timer(this.components);
+            this.comPortList = new System.Windows.Forms.ComboBox();
+            this.resultsFromR = new System.Windows.Forms.ListBox();
             this.tabs.SuspendLayout();
+            this.motorsTab.SuspendLayout();
             this.SuspendLayout();
             // 
             // serialMonitorLabel
@@ -70,6 +71,7 @@
             // 
             // motorsTab
             // 
+            this.motorsTab.Controls.Add(this.resultsFromR);
             this.motorsTab.Location = new System.Drawing.Point(4, 29);
             this.motorsTab.Name = "motorsTab";
             this.motorsTab.Padding = new System.Windows.Forms.Padding(3);
@@ -126,17 +128,6 @@
             this.progressBar1.TabIndex = 4;
             this.progressBar1.Value = 75;
             // 
-            // comPort
-            // 
-            this.comPort.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comPort.Location = new System.Drawing.Point(782, 134);
-            this.comPort.Name = "comPort";
-            this.comPort.Size = new System.Drawing.Size(106, 30);
-            this.comPort.TabIndex = 6;
-            this.comPort.TextChanged += new System.EventHandler(this.comPort_TextChanged);
-            this.comPort.Enter += new System.EventHandler(this.comPort_Enter);
-            this.comPort.Leave += new System.EventHandler(this.comPort_Leave);
-            // 
             // batteryLifeLabel
             // 
             this.batteryLifeLabel.AutoSize = true;
@@ -169,33 +160,39 @@
             this.serialClearButton.UseVisualStyleBackColor = true;
             this.serialClearButton.Click += new System.EventHandler(this.serialClearButton_Click);
             // 
-            // checkComPortsButton
-            // 
-            this.checkComPortsButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkComPortsButton.Location = new System.Drawing.Point(895, 133);
-            this.checkComPortsButton.Name = "checkComPortsButton";
-            this.checkComPortsButton.Size = new System.Drawing.Size(233, 31);
-            this.checkComPortsButton.TabIndex = 10;
-            this.checkComPortsButton.Text = "Check Available Ports";
-            this.checkComPortsButton.UseVisualStyleBackColor = true;
-            this.checkComPortsButton.Click += new System.EventHandler(this.checkComPortsButton_Click);
-            // 
             // serialMonitorTestTimer
             // 
             this.serialMonitorTestTimer.Enabled = true;
             this.serialMonitorTestTimer.Interval = 1000;
             this.serialMonitorTestTimer.Tick += new System.EventHandler(this.serialMonitorTestTimer_Tick);
             // 
+            // comPortList
+            // 
+            this.comPortList.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comPortList.FormattingEnabled = true;
+            this.comPortList.Location = new System.Drawing.Point(949, 133);
+            this.comPortList.Name = "comPortList";
+            this.comPortList.Size = new System.Drawing.Size(179, 28);
+            this.comPortList.TabIndex = 11;
+            // 
+            // resultsFromR
+            // 
+            this.resultsFromR.FormattingEnabled = true;
+            this.resultsFromR.ItemHeight = 20;
+            this.resultsFromR.Location = new System.Drawing.Point(232, 103);
+            this.resultsFromR.Name = "resultsFromR";
+            this.resultsFromR.Size = new System.Drawing.Size(240, 344);
+            this.resultsFromR.TabIndex = 0;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1140, 810);
-            this.Controls.Add(this.checkComPortsButton);
+            this.Controls.Add(this.comPortList);
             this.Controls.Add(this.serialClearButton);
             this.Controls.Add(this.serialBeginButton);
             this.Controls.Add(this.batteryLifeLabel);
-            this.Controls.Add(this.comPort);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.serialStopButton);
             this.Controls.Add(this.tabs);
@@ -205,6 +202,7 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tabs.ResumeLayout(false);
+            this.motorsTab.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -219,12 +217,12 @@
         private System.Windows.Forms.TabPage gyroTab;
         private System.Windows.Forms.Button serialStopButton;
         private System.Windows.Forms.ProgressBar progressBar1;
-        private System.Windows.Forms.TextBox comPort;
         private System.Windows.Forms.Label batteryLifeLabel;
         private System.Windows.Forms.Button serialBeginButton;
         private System.Windows.Forms.Button serialClearButton;
-        private System.Windows.Forms.Button checkComPortsButton;
         private System.Windows.Forms.Timer serialMonitorTestTimer;
+        private System.Windows.Forms.ComboBox comPortList;
+        private System.Windows.Forms.ListBox resultsFromR;
     }
 }
 
