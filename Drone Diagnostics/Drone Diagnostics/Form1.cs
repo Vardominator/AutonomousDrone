@@ -14,13 +14,13 @@ namespace Drone_Diagnostics
 {
     public partial class Form1 : Form
     {
-
-
+        
         string[] availablePorts;
         Random motorValueGenerator;
         int[] motorVals;
 
         string rScriptPath = @"F:\GitHub\AutonomousDrone\Drone Diagnostics\testScript.R";
+        string rScriptName = "testScript.R";
         string rScriptExecutablePath = @"C:\Program Files\Microsoft\MRO\R-3.2.5\bin\Rscript.exe";
         string rScriptArgument = "";
 
@@ -33,8 +33,14 @@ namespace Drone_Diagnostics
             
             motorValueGenerator = new Random();
             motorVals = new int[4];
-            
-            rScriptTest = new RScriptHandler(rScriptPath, rScriptExecutablePath);
+
+            // Automatically implement properties on the fly
+            rScriptTest = new RScriptHandler
+            {
+                ScriptPath = rScriptPath,
+                ScriptName = rScriptName,
+                ExecutablePath = rScriptExecutablePath
+            };
                 
             InitializeComponent();
 
