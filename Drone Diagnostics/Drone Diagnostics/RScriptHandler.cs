@@ -54,7 +54,9 @@ namespace Drone_Diagnostics
             }
             catch(Exception exception)
             {
+
                 throw new Exception($"R Script failed: {ResultFromScript}", exception);
+
             }
             
         }
