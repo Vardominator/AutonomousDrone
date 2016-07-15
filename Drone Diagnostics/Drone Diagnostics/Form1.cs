@@ -83,7 +83,7 @@ namespace Drone_Diagnostics
 
             // Scrolling for listboxes
             serialMonitor.SelectedIndex = serialMonitor.Items.Count - 1;
-            resultsFromR.SelectedIndex = serialMonitor.Items.Count - 1;
+            resultsFromR.SelectedIndex = resultsFromR.Items.Count - 1;
 
 
             for (int i = 0; i < motorVals.Length; i++)
@@ -118,6 +118,17 @@ namespace Drone_Diagnostics
             
         }
 
+        private void refreshSerial_Click(object sender, EventArgs e)
+        {
 
+            comPortList.Items.Clear();
+
+            availablePorts = SerialPort.GetPortNames();
+
+            foreach (var port in availablePorts)
+            {
+                comPortList.Items.Add(port);
+            }
+        }
     }
 }
