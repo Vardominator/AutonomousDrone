@@ -15,12 +15,14 @@ namespace Drone_Diagnostics
     public partial class Form1 : Form
     {
 
+        SerialPort testPort;
 
         string[] availablePorts;
         Random motorValueGenerator;
         int[] motorVals;
 
-        string rScriptPath = @"F:\GitHub\AutonomousDrone\Drone Diagnostics\testScript.R";
+        string rScriptPath = @"F:\GitHub\AutonomousDrone\Drone Diagnostics\";
+        string rScriptName = "testScript.R";
         string rScriptExecutablePath = @"C:\Program Files\Microsoft\MRO\R-3.2.5\bin\Rscript.exe";
         string rScriptArgument = "";
 
@@ -30,11 +32,11 @@ namespace Drone_Diagnostics
 
         public Form1()
         {
-            
+
             motorValueGenerator = new Random();
             motorVals = new int[4];
             
-            rScriptTest = new RScriptHandler(rScriptPath, rScriptExecutablePath);
+            rScriptTest = new RScriptHandler(rScriptPath, rScriptName, rScriptExecutablePath);
                 
             InitializeComponent();
 
@@ -66,7 +68,11 @@ namespace Drone_Diagnostics
         #region
         private void serialBeginButton_Click(object sender, EventArgs e)
         {
-            SerialHandler serialHandle = new SerialHandler();
+            //SerialHandler serialHandle = new SerialHandler();
+
+            testPort = new SerialPort(comPortList.GetItemText(comPortList.SelectedItem), 9600);
+            testPort.Open();
+
         }
         private void serialClearButton_Click(object sender, EventArgs e)
         {
@@ -74,7 +80,7 @@ namespace Drone_Diagnostics
         }
         private void serialStopButton_Click(object sender, EventArgs e)
         {
-
+            testPort.Close();
         }
         #endregion
 
@@ -92,7 +98,17 @@ namespace Drone_Diagnostics
                 rScriptArgument += motorVals[i] + " ";
             }
 
-            serialMonitor.Items.Add($"{motorVals[0]},{motorVals[1]},{motorVals[2]},{motorVals[3]}");
+
+            // Read from serial and flush
+            if (testPort != null)
+            {
+                
+                serialMonitor.Items.Add(testPort.ReadLine());
+                testPort.DiscardInBuffer();
+            }
+
+
+            //serialMonitor.Items.Add($"{motorVals[0]},{motorVals[1]},{motorVals[2]},{motorVals[3]}");
 
 
             string rScriptResult = "";
@@ -130,5 +146,12 @@ namespace Drone_Diagnostics
                 comPortList.Items.Add(port);
             }
         }
+
+        private void serialMonitor_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+
     }
 }

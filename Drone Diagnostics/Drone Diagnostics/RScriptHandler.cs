@@ -16,6 +16,7 @@ namespace Drone_Diagnostics
     {
 
         private string scriptPath;
+        private string scriptName;
         private string executablePath;
         private string resultFromScript;
 
@@ -23,14 +24,16 @@ namespace Drone_Diagnostics
         public RScriptHandler()
         {
             scriptPath = "";
+            scriptName = "";
             executablePath = "";
             resultFromScript = "";
         }
 
 
-        public RScriptHandler(string rCodeFilePath, string rScriptExecutablePath)
+        public RScriptHandler(string rScriptPath, string rScriptName,string rScriptExecutablePath)
         {
-            scriptPath = rCodeFilePath;
+            scriptPath = rScriptPath;
+            scriptName = rScriptName;
             executablePath = rScriptExecutablePath;
             resultFromScript = "";
         }
@@ -47,7 +50,7 @@ namespace Drone_Diagnostics
                 process.StartInfo.RedirectStandardOutput = true;
                 process.StartInfo.FileName = executablePath;
                 process.StartInfo.WorkingDirectory = Path.GetDirectoryName(scriptPath);
-                process.StartInfo.Arguments = "testScript.R" + " " + args;
+                process.StartInfo.Arguments = scriptName + " " + args;
                 process.StartInfo.CreateNoWindow = true;
                 process.Start();
                 resultFromScript = process.StandardOutput.ReadToEnd();
