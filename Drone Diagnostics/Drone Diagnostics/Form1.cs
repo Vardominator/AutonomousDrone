@@ -9,53 +9,39 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
+using System.IO;
 
 namespace Drone_Diagnostics
 {
     public partial class Form1 : Form
     {
-<<<<<<< HEAD
 
         SerialPort testPort;
+        string currentSerialLine;
 
-=======
-        
->>>>>>> 7121bf8bf3a707685cbfbadd02ace0f9ac64f7ec
         string[] availablePorts;
         Random motorValueGenerator;
-        int[] motorVals;
+        int[] sonarVals;
 
-<<<<<<< HEAD
         string rScriptPath = @"F:\GitHub\AutonomousDrone\Drone Diagnostics\";
-=======
-        string rScriptPath = @"F:\GitHub\AutonomousDrone\Drone Diagnostics\testScript.R";
->>>>>>> 7121bf8bf3a707685cbfbadd02ace0f9ac64f7ec
-        string rScriptName = "testScript.R";
+        string rScriptName = "sonarPlotsScript.R";
         string rScriptExecutablePath = @"C:\Program Files\Microsoft\MRO\R-3.2.5\bin\Rscript.exe";
         string rScriptArgument = "";
 
         RScriptHandler rScriptTest;
 
         Thread rCallingThread;
+        Thread imageLoadingThread;
 
         public Form1()
         {
-
-            motorValueGenerator = new Random();
-            motorVals = new int[4];
-<<<<<<< HEAD
             
-            rScriptTest = new RScriptHandler(rScriptPath, rScriptName, rScriptExecutablePath);
-=======
+            motorValueGenerator = new Random();
+            sonarVals = new int[4];
 
-            // Automatically implement properties on the fly
-            rScriptTest = new RScriptHandler
-            {
-                ScriptPath = rScriptPath,
-                ScriptName = rScriptName,
-                ExecutablePath = rScriptExecutablePath
-            };
->>>>>>> 7121bf8bf3a707685cbfbadd02ace0f9ac64f7ec
+            
+
+            rScriptTest = new RScriptHandler(rScriptPath, rScriptName, rScriptExecutablePath);
                 
             InitializeComponent();
 
@@ -63,6 +49,8 @@ namespace Drone_Diagnostics
 
         private void Form1_Load(object sender, EventArgs e)
         {
+
+            serialMonitorTestTimer.Interval = 200;
 
             availablePorts = SerialPort.GetPortNames();
 
@@ -111,40 +99,54 @@ namespace Drone_Diagnostics
             resultsFromR.SelectedIndex = resultsFromR.Items.Count - 1;
 
 
-            for (int i = 0; i < motorVals.Length; i++)
-            {
-                motorVals[i] = motorValueGenerator.Next(0, 101);
-                rScriptArgument += motorVals[i] + " ";
-            }
-
-
             // Read from serial and flush
             if (testPort != null)
             {
-                
+                currentSerialLine = testPort.ReadLine();
                 serialMonitor.Items.Add(testPort.ReadLine());
                 testPort.DiscardInBuffer();
             }
+            
 
-
-            //serialMonitor.Items.Add($"{motorVals[0]},{motorVals[1]},{motorVals[2]},{motorVals[3]}");
-
-
-            string rScriptResult = "";
-
-            // Lambda expression captures return value from thread
-            rCallingThread = new Thread(() =>
+            // Load sonar values to array
+            if (currentSerialLine != null)
             {
-                rScriptResult = rScriptTest.RunFromCommand(rScriptArgument);
-            });
 
-            rCallingThread.Start();
-            rCallingThread.Join();
+                for (int i = 0; i < sonarVals.Length; i++)
+                {
+                    sonarVals[i] = int.Parse(currentSerialLine);
+                    rScriptArgument += sonarVals[i] + " ";
+                }
 
+                string rScriptResult = "";
 
-            resultsFromR.Items.Add(rScriptResult);
+                // Lambda expression captures return value from thread
+                rCallingThread = new Thread(() =>
+                {
+                    rScriptResult = rScriptTest.RunFromCommand(rScriptArgument);
+                });
+                rCallingThread.Start();
+                rCallingThread.Join();
 
-            rScriptArgument = "";
+                resultsFromR.Items.Add(rScriptResult);
+
+                rScriptArgument = "";
+
+                // View sonar plot
+                imageLoadingThread = new Thread(() =>
+                {
+                    FileStream bitmapFile = new FileStream(@"F:\GitHub\AutonomousDrone\Drone Diagnostics\sonarPlots.png", FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+
+                    Image loadedImage = new Bitmap(bitmapFile);
+
+                    sonarViewer.Image = loadedImage;
+                    //sonarViewer.BackColor = Color.Gray;
+                });
+                imageLoadingThread.Start();
+                imageLoadingThread.Join();
+
+            }
+            
 
         }
 
@@ -171,6 +173,9 @@ namespace Drone_Diagnostics
 
         }
 
+        private void sonarViewer_Click(object sender, EventArgs e)
+        {
 
+        }
     }
 }

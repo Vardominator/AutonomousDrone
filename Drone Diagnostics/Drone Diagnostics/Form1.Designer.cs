@@ -40,8 +40,8 @@
             this.refreshSerial = new System.Windows.Forms.Button();
             this.serialMonitorLabel = new System.Windows.Forms.Label();
             this.rMonitorLabel = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.sonarViewer = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.sonarViewer)).BeginInit();
             this.SuspendLayout();
             // 
             // resultsFromR
@@ -150,20 +150,21 @@
             this.rMonitorLabel.TabIndex = 14;
             this.rMonitorLabel.Text = "R Monitor";
             // 
-            // pictureBox1
+            // sonarViewer
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(375, 297);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(295, 275);
-            this.pictureBox1.TabIndex = 15;
-            this.pictureBox1.TabStop = false;
+            this.sonarViewer.Location = new System.Drawing.Point(462, 152);
+            this.sonarViewer.Name = "sonarViewer";
+            this.sonarViewer.Size = new System.Drawing.Size(756, 584);
+            this.sonarViewer.TabIndex = 15;
+            this.sonarViewer.TabStop = false;
+            this.sonarViewer.Click += new System.EventHandler(this.sonarViewer_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1784, 861);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.sonarViewer);
             this.Controls.Add(this.rMonitorLabel);
             this.Controls.Add(this.serialMonitorLabel);
             this.Controls.Add(this.resultsFromR);
@@ -178,7 +179,7 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sonarViewer)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -196,7 +197,7 @@
         private System.Windows.Forms.Button refreshSerial;
         private System.Windows.Forms.Label serialMonitorLabel;
         private System.Windows.Forms.Label rMonitorLabel;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox sonarViewer;
     }
 }
 

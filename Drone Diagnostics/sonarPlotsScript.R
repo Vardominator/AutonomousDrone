@@ -1,0 +1,10 @@
+args <- commandArgs(TRUE)
+
+png(file = 'F:/GitHub/AutonomousDrone/Drone Diagnostics/sonarPlots.png')
+par(mfrow = c(1, 4))
+barplot(as.integer(args[1]), ylim = c(0, 25))
+barplot(as.integer(args[1]), ylim = c(0, 25), axes = F)
+barplot(as.integer(args[1]), ylim = c(0, 25), axes = F)
+barplot(as.integer(args[1]), ylim = c(0, 25), axes = F)
+dev.off()
+print('praise the sun')

@@ -14,23 +14,12 @@ namespace Drone_Diagnostics
     /// </summary>
     class RScriptHandler
     {
-
-<<<<<<< HEAD
+        
         private string scriptPath;
         private string scriptName;
         private string executablePath;
         private string resultFromScript;
-=======
-        public string ScriptPath { get; set; }
-        public string ScriptName { get; set; }
-        public string ExecutablePath { get; set; }
-        public string ResultFromScript { get; private set; }
->>>>>>> 7121bf8bf3a707685cbfbadd02ace0f9ac64f7ec
-
-        // Placeholder for automatically implemented properties
-        public RScriptHandler() { }
-
-<<<<<<< HEAD
+        
         public RScriptHandler()
         {
             scriptPath = "";
@@ -40,21 +29,12 @@ namespace Drone_Diagnostics
         }
 
 
-        public RScriptHandler(string rScriptPath, string rScriptName,string rScriptExecutablePath)
+        public RScriptHandler(string rScriptPath, string rScriptName, string rScriptExecutablePath)
         {
             scriptPath = rScriptPath;
             scriptName = rScriptName;
             executablePath = rScriptExecutablePath;
             resultFromScript = "";
-=======
-        
-        public RScriptHandler(string rScriptPath, string rScriptName, string rScriptExecutablePath)
-        {
-            ScriptPath = rScriptPath;
-            ScriptName = rScriptName;
-            ExecutablePath = rScriptExecutablePath;
-            ResultFromScript = "";
->>>>>>> 7121bf8bf3a707685cbfbadd02ace0f9ac64f7ec
         }
 
 
@@ -67,36 +47,24 @@ namespace Drone_Diagnostics
                 Process process = new Process();
                 process.StartInfo.UseShellExecute = false;
                 process.StartInfo.RedirectStandardOutput = true;
-<<<<<<< HEAD
                 process.StartInfo.FileName = executablePath;
                 process.StartInfo.WorkingDirectory = Path.GetDirectoryName(scriptPath);
                 process.StartInfo.Arguments = scriptName + " " + args;
-=======
-                process.StartInfo.FileName = ExecutablePath;
-                process.StartInfo.WorkingDirectory = Path.GetDirectoryName(ScriptPath);
-                process.StartInfo.Arguments = ScriptName + " " + args;
->>>>>>> 7121bf8bf3a707685cbfbadd02ace0f9ac64f7ec
                 process.StartInfo.CreateNoWindow = true;
                 process.Start();
-                ResultFromScript = process.StandardOutput.ReadToEnd();
+                resultFromScript = process.StandardOutput.ReadToEnd();
 
-                return ResultFromScript;
+                return resultFromScript;
 
             }
             catch(Exception exception)
             {
 
-                throw new Exception($"R Script failed: {ResultFromScript}", exception);
+                throw new Exception($"R Script failed");
 
             }
             
         }
-
-
-
-
-
-
 
     }
 }

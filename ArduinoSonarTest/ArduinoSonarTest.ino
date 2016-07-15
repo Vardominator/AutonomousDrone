@@ -17,7 +17,7 @@ void loop()
   //Serial.print("Left: ");
   Serial.println(ultraleft.Ranging(CM)); // CM or INC
   //Serial.print(" cm     " );
-  delay(50);
+  delay(40);
   //Serial.print("Right: ");
   //Serial.print(ultraright.Ranging(CM)); // CM or INC
   //Serial.println(" cm" );
