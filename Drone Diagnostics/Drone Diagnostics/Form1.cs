@@ -14,14 +14,22 @@ namespace Drone_Diagnostics
 {
     public partial class Form1 : Form
     {
+<<<<<<< HEAD
 
         SerialPort testPort;
 
+=======
+        
+>>>>>>> 7121bf8bf3a707685cbfbadd02ace0f9ac64f7ec
         string[] availablePorts;
         Random motorValueGenerator;
         int[] motorVals;
 
+<<<<<<< HEAD
         string rScriptPath = @"F:\GitHub\AutonomousDrone\Drone Diagnostics\";
+=======
+        string rScriptPath = @"F:\GitHub\AutonomousDrone\Drone Diagnostics\testScript.R";
+>>>>>>> 7121bf8bf3a707685cbfbadd02ace0f9ac64f7ec
         string rScriptName = "testScript.R";
         string rScriptExecutablePath = @"C:\Program Files\Microsoft\MRO\R-3.2.5\bin\Rscript.exe";
         string rScriptArgument = "";
@@ -35,8 +43,19 @@ namespace Drone_Diagnostics
 
             motorValueGenerator = new Random();
             motorVals = new int[4];
+<<<<<<< HEAD
             
             rScriptTest = new RScriptHandler(rScriptPath, rScriptName, rScriptExecutablePath);
+=======
+
+            // Automatically implement properties on the fly
+            rScriptTest = new RScriptHandler
+            {
+                ScriptPath = rScriptPath,
+                ScriptName = rScriptName,
+                ExecutablePath = rScriptExecutablePath
+            };
+>>>>>>> 7121bf8bf3a707685cbfbadd02ace0f9ac64f7ec
                 
             InitializeComponent();
 
