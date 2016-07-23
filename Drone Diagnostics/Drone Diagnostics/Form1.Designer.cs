@@ -107,7 +107,7 @@
             // serialMonitorTestTimer
             // 
             this.serialMonitorTestTimer.Enabled = true;
-            this.serialMonitorTestTimer.Interval = 500;
+            this.serialMonitorTestTimer.Interval = 200;
             this.serialMonitorTestTimer.Tick += new System.EventHandler(this.serialMonitorTestTimer_Tick);
             // 
             // comPortList

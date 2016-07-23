@@ -131,7 +131,7 @@ namespace Drone_Diagnostics
                 resultsFromR.Items.Add(rScriptResult);
 
                 rScriptArgument = "";
-
+                
                 // View sonar plot
                 imageLoadingThread = new Thread(() =>
                 {
