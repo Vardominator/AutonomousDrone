@@ -12,7 +12,7 @@ namespace Drone_Diagnostics
     /// <summary>
     /// Rscript.exe : C:\Program Files\Microsoft\MRO\R-3.2.5\bin
     /// </summary>
-    class RScriptHandler
+    public class RScriptHandler
     {
         
         private string scriptPath;
