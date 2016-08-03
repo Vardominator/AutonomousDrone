@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO.Ports;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -28,13 +29,19 @@ namespace Diagnostics_Tool
         SerialPort currentPort;
         string[] availablePorts;
 
+        PS4Controller controller;
+
         public MainWindow()
         {
+
+            Program.rootHub = new DS4Control.ControlService();
+            Program.rootHub.Start(true);
 
             dispatcherTimer = new DispatcherTimer();
             dispatcherTimer.Tick += dispatcherTimer_Tick;
             dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 500);
-            
+            dispatcherTimer.Start();
+
             InitializeComponent();
             availablePorts = SerialPort.GetPortNames();
 
@@ -43,14 +50,14 @@ namespace Diagnostics_Tool
                 serialPortsBox.Items.Add(portName);
             }
 
+            controller = new PS4Controller();
+
         }
-
-
-
+        
         private void serialGoButton_Click(object sender, RoutedEventArgs e)
         {
 
-            dispatcherTimer.Start();
+            
             currentPort = new SerialPort(serialPortsBox.SelectedItem.ToString(), 9600);
             currentPort.Open();
 
@@ -69,6 +76,9 @@ namespace Diagnostics_Tool
                 currentPort.DiscardInBuffer();
             }
 
+            controllerInputLabel.Content = "";
+            controllerInputLabel.Content = controller.ToString();
+
         }
 
         private void comboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -77,6 +87,11 @@ namespace Diagnostics_Tool
             {
                 serialGoButton.IsEnabled = true;
             }
+        }
+
+        private void tabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

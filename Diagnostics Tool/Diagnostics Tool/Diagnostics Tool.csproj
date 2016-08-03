@@ -42,6 +42,7 @@
     <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Management" />
     <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -56,6 +57,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PS4Controller.cs" />
     <Page Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -67,6 +69,34 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DS4Control\ControlSerivce.cs" />
+    <Compile Include="DS4Control\DS4LightBar.cs" />
+    <Compile Include="DS4Control\InputMethods.cs" />
+    <Compile Include="DS4Control\ITouchpadBehaviour.cs" />
+    <Compile Include="DS4Control\Log.cs" />
+    <Compile Include="DS4Control\Mapping.cs" />
+    <Compile Include="DS4Control\Mouse.cs" />
+    <Compile Include="DS4Control\MouseCursor.cs" />
+    <Compile Include="DS4Control\MouseWheel.cs" />
+    <Compile Include="DS4Control\ScpDevice.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DS4Control\ScpDevice.Designer.cs">
+      <DependentUpon>ScpDevice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DS4Control\ScpHub.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DS4Control\ScpHub.Designer.cs">
+      <DependentUpon>ScpHub.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DS4Control\ScpUtil.cs" />
+    <Compile Include="DS4Control\X360Device.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DS4Control\X360Device.designer.cs">
+      <DependentUpon>X360Device.cs</DependentUpon>
     </Compile>
     <Compile Include="DS4Library\DS4Device.cs" />
     <Compile Include="DS4Library\DS4Devices.cs" />

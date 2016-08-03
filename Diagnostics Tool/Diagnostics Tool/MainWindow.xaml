@@ -18,12 +18,15 @@
                 </Style>
             </ListBox.ItemContainerStyle>
         </ListBox>
-        <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="553" Margin="254,301,0,0" VerticalAlignment="Top" Width="922">
-            <TabItem Header="Controller"/>
+        <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="553" Margin="260,301,0,0" VerticalAlignment="Top" Width="922" SelectionChanged="tabControl_SelectionChanged">
+            <TabItem Header="Controller" HorizontalAlignment="Left" Width="69">
+                <Label x:Name="controllerInputLabel" Content="&#xD;&#xA;" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="80,183,0,0" Width="719" Height="41"/>
+            </TabItem>
             <TabItem Header="Blah" Height="22" VerticalAlignment="Top"/>
             <TabItem Header="TabItem">
                 <Grid Background="#FFE5E5E5" Margin="0,0,20,0"/>
             </TabItem>
+
         </TabControl>
 
     </Grid>

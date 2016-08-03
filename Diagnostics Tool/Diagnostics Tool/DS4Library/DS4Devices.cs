@@ -8,9 +8,12 @@ namespace Diagnostics_Tool.DS4Library
 {
     public class DS4Devices
     {
-        private static Dictionary<string, DS4Device> Devices = new Dictionary<string, DS4Device>();
+        public static Dictionary<string, DS4Device> Devices = new Dictionary<string, DS4Device>();
+
+
         private static HashSet<String> DevicePaths = new HashSet<String>();
         public static bool isExclusiveMode = false;
+
 
         //enumerates ds4 controllers in the system
         public static void findControllers()

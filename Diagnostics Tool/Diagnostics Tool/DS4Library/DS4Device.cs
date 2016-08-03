@@ -442,17 +442,17 @@ namespace Diagnostics_Tool.DS4Library
 
 
 
-
+                PS4Controller.Inputs = inputReport;
 
                 #region fuck boi status
                 for (int i = 0; i < inputReport.Length; i++)
                 {
 
-                    Console.Write(inputReport[i] + ", ");
+                    //Console.Write(inputReport[i] + ", ");
 
                 }
 
-                Console.WriteLine();
+                //Console.WriteLine();
                 #endregion
 
 
