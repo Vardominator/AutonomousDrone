@@ -15,7 +15,12 @@ void setup() {
 void loop()
 {
   //Serial.print("Left: ");
-  Serial.println(ultraleft.Ranging(CM)); // CM or INC
+  Serial.print("S:");
+  Serial.print(ultraleft.Ranging(CM)); Serial.print(",");
+  Serial.print(ultraleft.Ranging(CM)); Serial.print(",");
+  Serial.print(ultraleft.Ranging(CM)); Serial.print(",");
+  Serial.print(ultraleft.Ranging(CM)); Serial.print(",");
+  Serial.print(ultraleft.Ranging(CM)); Serial.println(";");
   //Serial.print(" cm     " );
   delay(40);
   //Serial.print("Right: ");

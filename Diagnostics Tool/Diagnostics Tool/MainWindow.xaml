@@ -7,11 +7,11 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="900" Width="1200">
     <Grid>
-        <ComboBox x:Name="serialPortsBox" HorizontalAlignment="Left" Margin="142,266,0,0" VerticalAlignment="Top" Width="98" Height="30" SelectionChanged="comboBox_SelectionChanged" FontSize="16"/>
-        <Label x:Name="serialMonitorLabel" HorizontalContentAlignment="Center" Content="Serial Monitor" HorizontalAlignment="Left" VerticalAlignment="Top" Width="230" Margin="10,230,0,0" FontSize="16" FontWeight="Bold"/>
-        <Button x:Name="serialGoButton" Content="Start" HorizontalAlignment="Left" Margin="10,266,0,0" VerticalAlignment="Top" Width="127" Height="30" Click="serialGoButton_Click" FontSize="16" IsEnabled="False"/>
+        <ComboBox x:Name="serialPortsBox" HorizontalAlignment="Left" Margin="135,40,0,0" VerticalAlignment="Top" Width="110" Height="30" SelectionChanged="comboBox_SelectionChanged" FontSize="16"/>
+        <Label x:Name="serialMonitorLabel" HorizontalContentAlignment="Center" Content="Serial Monitor" HorizontalAlignment="Left" VerticalAlignment="Top" Width="230" Margin="15,4,0,0" FontSize="16" FontWeight="Bold"/>
+        <Button x:Name="serialGoButton" Content="Start" HorizontalAlignment="Left" Margin="15,40,0,0" VerticalAlignment="Top" Width="110" Height="30" Click="serialGoButton_Click" FontSize="16" IsEnabled="False" RenderTransformOrigin="0.433,-5.367"/>
 
-        <ListBox x:Name="serialView" HorizontalAlignment="Left" Height="553" Margin="10,301,0,0" VerticalAlignment="Top" Width="230" FontSize="13">
+        <ListBox x:Name="serialView" HorizontalAlignment="Left" Height="553" Margin="10,301,0,0" VerticalAlignment="Top" Width="240" FontSize="13" BorderBrush="#FF898900" BorderThickness="2">
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
                     <Setter Property="Height" Value="25"/>
@@ -28,6 +28,19 @@
             </TabItem>
 
         </TabControl>
+        <Grid HorizontalAlignment="Left" Height="226" Margin="15,75,0,0" VerticalAlignment="Top" Width="230">
+            <CheckBox x:Name="gyroCheckBox" Content="Gyroscope" HorizontalAlignment="Left" Margin="11,78,0,0" VerticalAlignment="Top" Checked="checkBox_Checked"/>
+            <CheckBox x:Name="sonarsCheckBox" Content="Sonars" HorizontalAlignment="Left" Margin="11,38,0,0" VerticalAlignment="Top" Checked="sonarsCheckBox_Checked"/>
+            <Label x:Name="incomingLabel_Copy" Content="Incoming" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Width="115" BorderThickness="2,2,1,2" BorderBrush="Black"/>
+            <Label x:Name="outgoingLabel" Content="Outgoing" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="115,0,0,0" VerticalAlignment="Top" Width="115" BorderBrush="Black" BorderThickness="1,2,2,2"/>
+            <CheckBox x:Name="batteryCheckBox_Copy" Content="Battery" HorizontalAlignment="Left" Margin="11,58,0,0" VerticalAlignment="Top"/>
+            <CheckBox x:Name="batteryCheckBox" Content="Battery" HorizontalAlignment="Left" Margin="11,98,0,0" VerticalAlignment="Top"/>
+            <CheckBox x:Name="controllerCheckBox" Content="Controller" HorizontalAlignment="Left" Margin="129,38,0,0" VerticalAlignment="Top"/>
+            <CheckBox x:Name="motorOffsetsCheckBox" Content="Motor Offsets" HorizontalAlignment="Left" Margin="129,58,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.169,-0.533"/>
+            <CheckBox x:Name="checkBox6" Content="CheckBox" HorizontalAlignment="Left" Margin="11,118,0,0" VerticalAlignment="Top"/>
+            <CheckBox x:Name="checkBox5" Content="CheckBox" HorizontalAlignment="Left" Margin="129,78,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.479,-0.067"/>
+            <CheckBox x:Name="checkBox7" Content="CheckBox" HorizontalAlignment="Left" Margin="129,98,0,0" VerticalAlignment="Top"/>
+        </Grid>
 
     </Grid>
 </Window>

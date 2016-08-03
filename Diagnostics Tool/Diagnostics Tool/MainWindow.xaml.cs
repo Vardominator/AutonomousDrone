@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO.Ports;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -25,11 +26,12 @@ namespace Diagnostics_Tool
     {
 
         DispatcherTimer dispatcherTimer;
-
-        SerialPort currentPort;
+        
         string[] availablePorts;
 
         PS4Controller controller;
+
+        SerialHandler serialHandler;
 
         public MainWindow()
         {
@@ -43,44 +45,43 @@ namespace Diagnostics_Tool
             dispatcherTimer.Start();
 
             InitializeComponent();
-            availablePorts = SerialPort.GetPortNames();
-
-            foreach (string portName in availablePorts)
-            {
-                serialPortsBox.Items.Add(portName);
-            }
 
             controller = new PS4Controller();
+            
+            serialHandler = new SerialHandler();
+            serialHandler.FindAvailablePorts(serialPortsBox);
 
+            Loaded += MainWindow_Loaded;
+            
         }
+
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            serialHandler.SetUpFilters();
+        }
+        
         
         private void serialGoButton_Click(object sender, RoutedEventArgs e)
         {
-            
-            currentPort = new SerialPort(serialPortsBox.SelectedItem.ToString(), 9600);
-            currentPort.Open();
 
+            serialHandler.Start(serialPortsBox.SelectedItem.ToString());
+            
         }
 
 
-        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        private async void dispatcherTimer_Tick(object sender, EventArgs e)
         {
-            
-            serialView.SelectedIndex = serialView.Items.Count - 1;
 
-            if(currentPort != null)
-            {
-                string currentSerialLine = currentPort.ReadLine();
-                serialView.Items.Add(currentSerialLine);
-                currentPort.DiscardInBuffer();
-            }
+            serialHandler.UpdateFilters();
+            
+            serialHandler.UpdateMonitorIncoming(serialView);
 
             if (PS4Controller.Enabled)
             {
                 controllerInputLabel.Content = "";
                 controllerInputLabel.Content = controller.ToString();
             }
-           
+
         }
 
         private void comboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -92,6 +93,16 @@ namespace Diagnostics_Tool
         }
 
         private void tabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void checkBox_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void sonarsCheckBox_Checked(object sender, RoutedEventArgs e)
         {
 
         }
