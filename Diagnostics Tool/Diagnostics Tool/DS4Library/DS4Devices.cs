@@ -35,6 +35,7 @@ namespace Diagnostics_Tool.DS4Library
                         // TODO in exclusive mode, try to hold both open when both are connected
                         if (isExclusiveMode && !hDevice.IsOpen)
                             hDevice.OpenDevice(false);
+
                     }
                     if (hDevice.IsOpen)
                     {
@@ -42,6 +43,8 @@ namespace Diagnostics_Tool.DS4Library
                             continue; // happens when the BT endpoint already is open and the USB is plugged into the same host
                         else
                         {
+                         
+
                             DS4Device ds4Device = new DS4Device(hDevice);
                             ds4Device.Removal += On_Removal;
                             Devices.Add(ds4Device.MacAddress, ds4Device);

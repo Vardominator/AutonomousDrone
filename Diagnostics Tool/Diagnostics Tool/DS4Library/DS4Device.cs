@@ -356,6 +356,10 @@ namespace Diagnostics_Tool.DS4Library
             sw.Start();
             while (true)
             {
+
+
+                PS4Controller.Enabled = true;
+
                 string currerror = string.Empty;
                 Latency.Add(sw.ElapsedMilliseconds - oldtime);
                 oldtime = sw.ElapsedMilliseconds;
@@ -380,6 +384,7 @@ namespace Diagnostics_Tool.DS4Library
                         readTimeout.Interval = 3000.0;
                 }
                 readTimeout.Enabled = true;
+
                 if (conType != ConnectionType.USB)
                 {
                     HidDevice.ReadStatus res = hDevice.ReadFile(btInputReport);
@@ -419,6 +424,7 @@ namespace Diagnostics_Tool.DS4Library
 	                //Received incorrect report, skip it
 	                continue;
 	            }
+
                 DateTime utcNow = System.DateTime.UtcNow; // timestamp with UTC in case system time zone changes
                 resetHapticState();
                 cState.ReportTimeStamp = utcNow;

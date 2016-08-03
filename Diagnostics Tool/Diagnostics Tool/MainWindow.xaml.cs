@@ -56,7 +56,6 @@ namespace Diagnostics_Tool
         
         private void serialGoButton_Click(object sender, RoutedEventArgs e)
         {
-
             
             currentPort = new SerialPort(serialPortsBox.SelectedItem.ToString(), 9600);
             currentPort.Open();
@@ -76,9 +75,12 @@ namespace Diagnostics_Tool
                 currentPort.DiscardInBuffer();
             }
 
-            controllerInputLabel.Content = "";
-            controllerInputLabel.Content = controller.ToString();
-
+            if (PS4Controller.Enabled)
+            {
+                controllerInputLabel.Content = "";
+                controllerInputLabel.Content = controller.ToString();
+            }
+           
         }
 
         private void comboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

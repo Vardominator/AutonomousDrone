@@ -9,7 +9,7 @@ namespace Diagnostics_Tool
     public class PS4Controller
     {
         public static byte[] Inputs { get; set; }
-
+        public static bool Enabled { get; set; }
 
         public override string ToString()
         {
