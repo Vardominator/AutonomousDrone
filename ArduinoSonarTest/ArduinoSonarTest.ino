@@ -14,13 +14,24 @@ void setup() {
 
 void loop()
 {
+
   //Serial.print("Left: ");
+  
+  Serial.print("<");
   Serial.print("S:");
   Serial.print(ultraleft.Ranging(CM)); Serial.print(",");
   Serial.print(ultraleft.Ranging(CM)); Serial.print(",");
   Serial.print(ultraleft.Ranging(CM)); Serial.print(",");
   Serial.print(ultraleft.Ranging(CM)); Serial.print(",");
-  Serial.print(ultraleft.Ranging(CM)); Serial.println(";");
+  Serial.print(ultraleft.Ranging(CM)); Serial.print(";");
+  Serial.print("G:");
+  Serial.print(100); Serial.print(",");
+  Serial.print(100); Serial.print(",");
+  Serial.print(100); Serial.print(",");
+  Serial.print(100); Serial.print(",");
+  Serial.print(100); Serial.print(";");
+  Serial.println(">");
+  
   //Serial.print(" cm     " );
   delay(40);
   //Serial.print("Right: ");

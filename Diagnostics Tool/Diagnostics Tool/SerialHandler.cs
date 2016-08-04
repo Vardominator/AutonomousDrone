@@ -15,7 +15,6 @@ namespace Diagnostics_Tool
     {
 
         Dictionary<char, bool> serialFilter;
-
         Dictionary<char, List<int>> message;
 
         SerialPort activePort;
@@ -66,12 +65,13 @@ namespace Diagnostics_Tool
             {
 
                 string currentSerialLine = activePort.ReadLine().TrimEnd(new char[] { '\r', '\n' });
-
-                string[] subMessages = currentSerialLine.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
-
-                if (subMessages[0][0] == 'S')
+                
+                if (currentSerialLine != null && currentSerialLine[0] == '<' && currentSerialLine[currentSerialLine.Length - 1] == '>')
                 {
-
+                                        
+                    currentSerialLine = currentSerialLine.Trim(new char[] { '<', '>' });
+                    string[] subMessages = currentSerialLine.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+                    
                     foreach (string subMessage in subMessages)
                     {
                         string[] keyValuePair = subMessage.Split(new char[] { ':' });

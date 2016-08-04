@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:Diagnostics_Tool"
         mc:Ignorable="d"
         Title="MainWindow" Height="900" Width="1200">
+    
     <Grid>
         <ComboBox x:Name="serialPortsBox" HorizontalAlignment="Left" Margin="135,40,0,0" VerticalAlignment="Top" Width="110" Height="30" SelectionChanged="comboBox_SelectionChanged" FontSize="16"/>
         <Label x:Name="serialMonitorLabel" HorizontalContentAlignment="Center" Content="Serial Monitor" HorizontalAlignment="Left" VerticalAlignment="Top" Width="230" Margin="15,4,0,0" FontSize="16" FontWeight="Bold"/>
@@ -18,14 +19,49 @@
                 </Style>
             </ListBox.ItemContainerStyle>
         </ListBox>
+        
         <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="553" Margin="260,301,0,0" VerticalAlignment="Top" Width="922" SelectionChanged="tabControl_SelectionChanged">
+
             <TabItem Header="Controller" HorizontalAlignment="Left" Width="69">
-                <Label x:Name="controllerInputLabel" Content="&#xD;&#xA;" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="80,183,0,0" Width="719" Height="41"/>
+                <Grid>
+                    <Label x:Name="controllerInputLabel" Content="Label" HorizontalAlignment="Left" Margin="10,487,0,0" VerticalAlignment="Top" Width="686"/>
+                    <Slider x:Name="leftStickAxisXSlider" Margin="10,10,606,492" Width="300" Maximum="255" />
+                    <Slider x:Name="rightStickAxisXSlider" Margin="10,36,606,466" Width="300" Maximum="255" />
+                    <Slider x:Name="leftStickAxisYSlider" Margin="-58,222,674,281" Width="300" Maximum="255" RenderTransformOrigin="0.5,0.5" >
+                        <Slider.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="90"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Slider.RenderTransform>
+                    </Slider>
+                    <Slider x:Name="rightStickAxisYSlider" Margin="7,222,609,281" Width="300" Maximum="255" RenderTransformOrigin="0.5,0.5" >
+                        <Slider.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="90"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Slider.RenderTransform>
+                    </Slider>
+
+                    
+                    <Canvas x:Name="leftStickCanvas" HorizontalAlignment="Left" Margin="270,92,0,0" VerticalAlignment="Top" Width="255" Height="255"/>
+
+
+                </Grid>
+
             </TabItem>
+
             <TabItem Header="Blah" Height="22" VerticalAlignment="Top"/>
             <TabItem Header="TabItem">
                 <Grid Background="#FFE5E5E5" Margin="0,0,20,0"/>
             </TabItem>
+
+
 
         </TabControl>
         <Grid HorizontalAlignment="Left" Height="226" Margin="15,75,0,0" VerticalAlignment="Top" Width="230">
@@ -41,6 +77,8 @@
             <CheckBox x:Name="checkBox5" Content="CheckBox" HorizontalAlignment="Left" Margin="129,78,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.479,-0.067"/>
             <CheckBox x:Name="checkBox7" Content="CheckBox" HorizontalAlignment="Left" Margin="129,98,0,0" VerticalAlignment="Top"/>
         </Grid>
+        <Viewbox x:Name="testBox" HorizontalAlignment="Left" Height="190" Margin="502,40,0,0" VerticalAlignment="Top" Width="199"/>
+
 
     </Grid>
 </Window>

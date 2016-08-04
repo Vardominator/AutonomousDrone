@@ -26,12 +26,15 @@ namespace Diagnostics_Tool
     {
 
         DispatcherTimer dispatcherTimer;
-        
-        string[] availablePorts;
 
         PS4Controller controller;
 
         SerialHandler serialHandler;
+
+        
+        Rectangle testRectangle;
+
+        Rectangle rect;
 
         public MainWindow()
         {
@@ -41,7 +44,7 @@ namespace Diagnostics_Tool
 
             dispatcherTimer = new DispatcherTimer();
             dispatcherTimer.Tick += dispatcherTimer_Tick;
-            dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 500);
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 20);
             dispatcherTimer.Start();
 
             InitializeComponent();
@@ -52,12 +55,27 @@ namespace Diagnostics_Tool
             serialHandler.FindAvailablePorts(serialPortsBox);
 
             Loaded += MainWindow_Loaded;
-            
+
+
+            testRectangle = new Rectangle { Stroke = Brushes.Black, StrokeThickness = 2 };
+
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             serialHandler.SetUpFilters();
+
+            leftStickCanvas.Children.Insert(0, testRectangle);
+
+            rect = new Rectangle();
+            rect.Width = 10;
+            rect.Height = 10;
+            rect.Stroke = Brushes.Blue;
+            rect.Fill = Brushes.Black;
+            leftStickCanvas.Children.Add(rect);
+            Canvas.SetTop(rect, 10);
+            Canvas.SetLeft(rect, 10);
+
         }
         
         
@@ -67,11 +85,9 @@ namespace Diagnostics_Tool
             serialHandler.Start(serialPortsBox.SelectedItem.ToString());
             
         }
-
-
-        private async void dispatcherTimer_Tick(object sender, EventArgs e)
+        
+        private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
-
             serialHandler.UpdateFilters();
             
             serialHandler.UpdateMonitorIncoming(serialView);
@@ -80,8 +96,16 @@ namespace Diagnostics_Tool
             {
                 controllerInputLabel.Content = "";
                 controllerInputLabel.Content = controller.ToString();
-            }
 
+                leftStickAxisXSlider.Value = PS4Controller.Inputs[1];
+                leftStickAxisYSlider.Value = PS4Controller.Inputs[2];
+                rightStickAxisXSlider.Value = PS4Controller.Inputs[3];
+                rightStickAxisYSlider.Value = PS4Controller.Inputs[4];
+
+                Canvas.SetLeft(rect, PS4Controller.Inputs[1]);
+                Canvas.SetTop(rect, PS4Controller.Inputs[2]);
+                
+            }
         }
 
         private void comboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
