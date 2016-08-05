@@ -42,7 +42,6 @@ namespace Diagnostics_Tool
             {
                 if (!serialFilter.ContainsKey(checkBox.Content.ToString()[0]))
                 {
-                    Console.WriteLine(checkBox.Content.ToString());
                     serialFilter.Add((checkBox.Content.ToString())[0], (bool)checkBox.IsChecked);
                 }
             }
@@ -53,7 +52,7 @@ namespace Diagnostics_Tool
             foreach (CheckBox checkBox in FindVisualChildren<CheckBox>(Application.Current.MainWindow))
             {
                 serialFilter[checkBox.Content.ToString()[0]] = (bool)checkBox.IsChecked;
-                Console.WriteLine($"{checkBox.Content.ToString()[0]}:{serialFilter[checkBox.Content.ToString()[0]]}");
+                //Console.WriteLine($"{checkBox.Content.ToString()[0]}:{serialFilter[checkBox.Content.ToString()[0]]}");
             }
         }
 
@@ -67,8 +66,8 @@ namespace Diagnostics_Tool
                 string currentSerialLine = activePort.ReadLine().TrimEnd(new char[] { '\r', '\n' });
                 
                 if (currentSerialLine != null && currentSerialLine[0] == '<' && currentSerialLine[currentSerialLine.Length - 1] == '>')
-                {
-                                        
+                {  
+                                      
                     currentSerialLine = currentSerialLine.Trim(new char[] { '<', '>' });
                     string[] subMessages = currentSerialLine.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
                     
@@ -116,6 +115,7 @@ namespace Diagnostics_Tool
                     {
                         yield return grandChild;
                     }
+                    
                 }
             }
         }

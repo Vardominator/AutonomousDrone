@@ -1,19 +1,9 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO.Ports;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 
@@ -27,14 +17,10 @@ namespace Diagnostics_Tool
 
         DispatcherTimer dispatcherTimer;
 
-        PS4Controller controller;
-
         SerialHandler serialHandler;
+        ControllerTabHandler controllerTab;
 
-        
-        Rectangle testRectangle;
-
-        Rectangle rect;
+        IEnumerable<CheckBox> allCheckBoxes;
 
         public MainWindow()
         {
@@ -42,69 +28,77 @@ namespace Diagnostics_Tool
             Program.rootHub = new DS4Control.ControlService();
             Program.rootHub.Start(true);
 
-            dispatcherTimer = new DispatcherTimer();
+            Loaded += MainWindow_Loaded;
+
+            dispatcherTimer = new DispatcherTimer
+            {
+                Interval = new TimeSpan(0, 0, 0, 0, 20)
+            };
+            
             dispatcherTimer.Tick += dispatcherTimer_Tick;
-            dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 20);
             dispatcherTimer.Start();
 
             InitializeComponent();
-
-            controller = new PS4Controller();
             
             serialHandler = new SerialHandler();
             serialHandler.FindAvailablePorts(serialPortsBox);
 
-            Loaded += MainWindow_Loaded;
+            inputRadioButton.Checked += InputRadioButton_Checked;
+            outputRadioButton.Checked += OutputRadioButton_Checked;
+            allRadioButton.Checked += AllRadioButton_Checked;
 
+            sonarsCheckBox.IsChecked = true;
 
-            testRectangle = new Rectangle { Stroke = Brushes.Black, StrokeThickness = 2 };
+        }
 
+        private void AllRadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            foreach (var checkbox in allCheckBoxes)
+            {
+                checkbox.IsChecked = true;
+            }
+        }
+
+        private void InputRadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            foreach (var checkbox in allCheckBoxes)
+            {
+                checkbox.IsChecked = (string)checkbox.Tag == "IncomingCheckBox";
+            }
+        }
+
+        private void OutputRadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            foreach (var checkbox in allCheckBoxes)
+            {
+                checkbox.IsChecked = (string)checkbox.Tag == "OutgoingCheckBox";
+            }
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             serialHandler.SetUpFilters();
+            controllerTab = new ControllerTabHandler(leftStickCanvas, rightStickCanvas);
 
-            leftStickCanvas.Children.Insert(0, testRectangle);
-
-            rect = new Rectangle();
-            rect.Width = 10;
-            rect.Height = 10;
-            rect.Stroke = Brushes.Blue;
-            rect.Fill = Brushes.Black;
-            leftStickCanvas.Children.Add(rect);
-            Canvas.SetTop(rect, 10);
-            Canvas.SetLeft(rect, 10);
-
+            allCheckBoxes = GetControls<CheckBox>(this);
         }
-        
         
         private void serialGoButton_Click(object sender, RoutedEventArgs e)
         {
-
             serialHandler.Start(serialPortsBox.SelectedItem.ToString());
-            
         }
         
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
             serialHandler.UpdateFilters();
-            
             serialHandler.UpdateMonitorIncoming(serialView);
-
+                
             if (PS4Controller.Enabled)
             {
                 controllerInputLabel.Content = "";
-                controllerInputLabel.Content = controller.ToString();
+                controllerInputLabel.Content = PS4Controller.FullOutput;
 
-                leftStickAxisXSlider.Value = PS4Controller.Inputs[1];
-                leftStickAxisYSlider.Value = PS4Controller.Inputs[2];
-                rightStickAxisXSlider.Value = PS4Controller.Inputs[3];
-                rightStickAxisYSlider.Value = PS4Controller.Inputs[4];
-
-                Canvas.SetLeft(rect, PS4Controller.Inputs[1]);
-                Canvas.SetTop(rect, PS4Controller.Inputs[2]);
-                
+                controllerTab.UpdateIndicators();
             }
         }
 
@@ -116,17 +110,29 @@ namespace Diagnostics_Tool
             }
         }
 
-        private void tabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void outputRadioButton_Checked(object sender, RoutedEventArgs e)
         {
 
         }
-
-        private void checkBox_Checked(object sender, RoutedEventArgs e)
+        
+        public IEnumerable<T> GetControls<T>(DependencyObject obj) where T: DependencyObject
         {
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
+            {
+                DependencyObject child = VisualTreeHelper.GetChild(obj, i);
+                if (child is T)
+                {
+                    yield return (T)child;
+                }
 
+                foreach (var grandChild in GetControls<T>(child))
+                {
+                    yield return grandChild;
+                }
+            }
         }
 
-        private void sonarsCheckBox_Checked(object sender, RoutedEventArgs e)
+        private void inputRadioButton_Checked_1(object sender, RoutedEventArgs e)
         {
 
         }

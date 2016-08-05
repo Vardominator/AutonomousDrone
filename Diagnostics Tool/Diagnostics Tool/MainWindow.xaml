@@ -5,79 +5,71 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Diagnostics_Tool"
         mc:Ignorable="d"
-        Title="MainWindow" Height="900" Width="1200">
-    
-    <Grid>
-        <ComboBox x:Name="serialPortsBox" HorizontalAlignment="Left" Margin="135,40,0,0" VerticalAlignment="Top" Width="110" Height="30" SelectionChanged="comboBox_SelectionChanged" FontSize="16"/>
-        <Label x:Name="serialMonitorLabel" HorizontalContentAlignment="Center" Content="Serial Monitor" HorizontalAlignment="Left" VerticalAlignment="Top" Width="230" Margin="15,4,0,0" FontSize="16" FontWeight="Bold"/>
-        <Button x:Name="serialGoButton" Content="Start" HorizontalAlignment="Left" Margin="15,40,0,0" VerticalAlignment="Top" Width="110" Height="30" Click="serialGoButton_Click" FontSize="16" IsEnabled="False" RenderTransformOrigin="0.433,-5.367"/>
+        Title="MainWindow" Height="800" Width="1200">
 
-        <ListBox x:Name="serialView" HorizontalAlignment="Left" Height="553" Margin="10,301,0,0" VerticalAlignment="Top" Width="240" FontSize="13" BorderBrush="#FF898900" BorderThickness="2">
+    <Grid Margin="0,0,0,-31" Height="800" VerticalAlignment="Top" HorizontalAlignment="Left" Width="1147">
+        <ComboBox x:Name="serialPortsBox" HorizontalAlignment="Left" Margin="123,46,0,0" VerticalAlignment="Top" Width="110" Height="30" SelectionChanged="comboBox_SelectionChanged" FontSize="16"/>
+        <Label x:Name="serialMonitorLabel" HorizontalContentAlignment="Center" Content="Serial Monitor" HorizontalAlignment="Left" VerticalAlignment="Top" Width="230" Margin="13,10,0,0" FontSize="16" FontWeight="Bold" RenderTransformOrigin="0.513,1.323"/>
+        <Button x:Name="serialGoButton" Content="Start" HorizontalAlignment="Left" Margin="13,46,0,0" VerticalAlignment="Top" Width="102" Height="30" Click="serialGoButton_Click" FontSize="16" IsEnabled="False" RenderTransformOrigin="0.433,-5.367"/>
+
+        <ListBox x:Name="serialView" HorizontalAlignment="Left" Height="482" Margin="8,272,0,0" VerticalAlignment="Top" Width="225" FontSize="13" BorderBrush="#FF898900" BorderThickness="2">
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
                     <Setter Property="Height" Value="25"/>
                 </Style>
             </ListBox.ItemContainerStyle>
         </ListBox>
-        
-        <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="553" Margin="260,301,0,0" VerticalAlignment="Top" Width="922" SelectionChanged="tabControl_SelectionChanged">
+
+
+        <!--Main tab structure controllers-->
+        <TabControl x:Name="tabControl" HorizontalAlignment="Left" Margin="240,272,0,46" Width="897">
 
             <TabItem Header="Controller" HorizontalAlignment="Left" Width="69">
                 <Grid>
-                    <Label x:Name="controllerInputLabel" Content="Label" HorizontalAlignment="Left" Margin="10,487,0,0" VerticalAlignment="Top" Width="686"/>
-                    <Slider x:Name="leftStickAxisXSlider" Margin="10,10,606,492" Width="300" Maximum="255" />
-                    <Slider x:Name="rightStickAxisXSlider" Margin="10,36,606,466" Width="300" Maximum="255" />
-                    <Slider x:Name="leftStickAxisYSlider" Margin="-58,222,674,281" Width="300" Maximum="255" RenderTransformOrigin="0.5,0.5" >
-                        <Slider.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform/>
-                                <RotateTransform Angle="90"/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </Slider.RenderTransform>
-                    </Slider>
-                    <Slider x:Name="rightStickAxisYSlider" Margin="7,222,609,281" Width="300" Maximum="255" RenderTransformOrigin="0.5,0.5" >
-                        <Slider.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform/>
-                                <RotateTransform Angle="90"/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </Slider.RenderTransform>
-                    </Slider>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="221*"/>
+                        <ColumnDefinition Width="237*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label x:Name="controllerInputLabel" Content="Label" HorizontalAlignment="Left" Margin="10,342,0,0" VerticalAlignment="Top" Width="686" Grid.ColumnSpan="2"/>
 
-                    
-                    <Canvas x:Name="leftStickCanvas" HorizontalAlignment="Left" Margin="270,92,0,0" VerticalAlignment="Top" Width="255" Height="255"/>
-
+                    <Canvas x:Name="leftStickCanvas" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="267" Height="267" Background="Beige"/>
+                    <Canvas x:Name="rightStickCanvas" HorizontalAlignment="Left" Margin="292,10,0,0" VerticalAlignment="Top" Width="267" Height="267" Background="Beige" Grid.ColumnSpan="2"/>
 
                 </Grid>
 
             </TabItem>
 
-            <TabItem Header="Blah" Height="22" VerticalAlignment="Top"/>
-            <TabItem Header="TabItem">
+            <TabItem Header="Sonars" Height="22" VerticalAlignment="Top">
+                <Grid>
+                    
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Gyroscope">
                 <Grid Background="#FFE5E5E5" Margin="0,0,20,0"/>
             </TabItem>
 
-
+            <TabItem Header="Motors/PID">
+                
+            </TabItem>
 
         </TabControl>
-        <Grid HorizontalAlignment="Left" Height="226" Margin="15,75,0,0" VerticalAlignment="Top" Width="230">
-            <CheckBox x:Name="gyroCheckBox" Content="Gyroscope" HorizontalAlignment="Left" Margin="11,78,0,0" VerticalAlignment="Top" Checked="checkBox_Checked"/>
-            <CheckBox x:Name="sonarsCheckBox" Content="Sonars" HorizontalAlignment="Left" Margin="11,38,0,0" VerticalAlignment="Top" Checked="sonarsCheckBox_Checked"/>
-            <Label x:Name="incomingLabel_Copy" Content="Incoming" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Width="115" BorderThickness="2,2,1,2" BorderBrush="Black"/>
-            <Label x:Name="outgoingLabel" Content="Outgoing" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="115,0,0,0" VerticalAlignment="Top" Width="115" BorderBrush="Black" BorderThickness="1,2,2,2"/>
-            <CheckBox x:Name="batteryCheckBox_Copy" Content="Battery" HorizontalAlignment="Left" Margin="11,58,0,0" VerticalAlignment="Top"/>
-            <CheckBox x:Name="batteryCheckBox" Content="Battery" HorizontalAlignment="Left" Margin="11,98,0,0" VerticalAlignment="Top"/>
-            <CheckBox x:Name="controllerCheckBox" Content="Controller" HorizontalAlignment="Left" Margin="129,38,0,0" VerticalAlignment="Top"/>
-            <CheckBox x:Name="motorOffsetsCheckBox" Content="Motor Offsets" HorizontalAlignment="Left" Margin="129,58,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.169,-0.533"/>
-            <CheckBox x:Name="checkBox6" Content="CheckBox" HorizontalAlignment="Left" Margin="11,118,0,0" VerticalAlignment="Top"/>
-            <CheckBox x:Name="checkBox5" Content="CheckBox" HorizontalAlignment="Left" Margin="129,78,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.479,-0.067"/>
-            <CheckBox x:Name="checkBox7" Content="CheckBox" HorizontalAlignment="Left" Margin="129,98,0,0" VerticalAlignment="Top"/>
+        
+        
+        <Grid HorizontalAlignment="Left" Height="186" Margin="13,81,0,0" VerticalAlignment="Top" Width="220">
+            <CheckBox x:Name="gyroCheckBox" Content="Gyroscope" HorizontalAlignment="Left" Margin="11,78,0,0" VerticalAlignment="Top" Tag="IncomingCheckBox"/>
+            <CheckBox x:Name="sonarsCheckBox" Content="Sonars" HorizontalAlignment="Left" Margin="11,38,0,0" VerticalAlignment="Top" Tag="IncomingCheckBox"/>
+            <Label x:Name="incomingLabel" Content="Incoming" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Width="105" BorderThickness="2,2,1,2" BorderBrush="Black"/>
+            <Label x:Name="outgoingLabel" Content="Outgoing" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="105,0,0,0" VerticalAlignment="Top" Width="115" BorderBrush="Black" BorderThickness="1,2,2,2"/>
+            <CheckBox x:Name="batteryCheckBox" Content="Battery" HorizontalAlignment="Left" Margin="11,58,0,0" VerticalAlignment="Top" Tag="IncomingCheckBox"/>
+            <CheckBox x:Name="controllerCheckBox" Content="Controller" HorizontalAlignment="Left" Margin="116,38,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.164,0.667" Tag="OutgoingCheckBox"/>
+            <CheckBox x:Name="motorOffsetsCheckBox" Content="Motor Offsets" HorizontalAlignment="Left" Margin="116,58,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.169,-0.533" Tag="OutgoingCheckBox"/>
+            <CheckBox x:Name="RResponseCheckBox" Content="R Response" HorizontalAlignment="Left" Margin="11,98,0,0" VerticalAlignment="Top" Tag="IncomingCheckBox"/>
+            <CheckBox x:Name="RCallsCheckBox" Content="R Calls" HorizontalAlignment="Left" Margin="116,78,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.479,-0.067" Tag="OutgoingCheckBox"/>
+            <RadioButton x:Name="outputRadioButton" Content="Outputs" HorizontalAlignment="Left" Margin="82,166,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.935,0.2" Checked="outputRadioButton_Checked"/>
+            <RadioButton x:Name="allRadioButton" Content="All" HorizontalAlignment="Left" Margin="165,166,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.152,0.533"/>
+            <RadioButton x:Name="inputRadioButton" Content="Inputs" HorizontalAlignment="Left" Margin="10,166,0,0" VerticalAlignment="Top" Checked="inputRadioButton_Checked_1" />
         </Grid>
-        <Viewbox x:Name="testBox" HorizontalAlignment="Left" Height="190" Margin="502,40,0,0" VerticalAlignment="Top" Width="199"/>
 
 
     </Grid>

@@ -8,20 +8,30 @@ namespace Diagnostics_Tool
 {
     public class PS4Controller
     {
+        public enum PS4Button
+        {
+            HOME,
+            LEFTSTICK,
+            RIGHTSTICK
+        }
+
         public static byte[] Inputs { get; set; }
         public static bool Enabled { get; set; }
 
-        public override string ToString()
+        public static string FullOutput
         {
-            StringBuilder inputsSB = new StringBuilder();
-
-            foreach (byte value in Inputs)
+            get
             {
-                inputsSB.Append(value + ", ");
+                StringBuilder inputsSB = new StringBuilder();
+
+                foreach (byte value in Inputs)
+                {
+                    inputsSB.Append(value + ", ");
+                }
+
+                return inputsSB.ToString();
             }
-
-            return inputsSB.ToString();
-
         }
+
     }
 }
