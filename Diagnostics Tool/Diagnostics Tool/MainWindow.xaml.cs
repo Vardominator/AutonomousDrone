@@ -136,5 +136,11 @@ namespace Diagnostics_Tool
         {
 
         }
+
+        private void refreshPorts_Clicked(object sender, RoutedEventArgs e)
+        {
+            serialPortsBox.Items.Clear();
+            serialHandler.FindAvailablePorts(serialPortsBox);
+        }
     }
 }
